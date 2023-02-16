@@ -9,7 +9,9 @@ const server = http.createServer((req, res) => {
   } else if (req.url === '/bad-request') {
     res.statusCode = 400;
     res.end('Bad Request');
+    console.log('Error page with bad request');
   } else if (req.url === '/internal-error') {
+    console.log(req.body);
     res.statusCode = 500;
     res.end('Internal Error');
     console.log("Callback Server internal-error")

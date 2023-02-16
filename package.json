@@ -1,0 +1,8 @@
+{
+  "name": "callbackserver",
+  "version": "1.0.0",
+  "main": "nodeserver.js",
+  "repository": "https://github.com/0xjib/callbackserver.git",
+  "author": "0xjib <ajibola@knabu.me>",
+  "license": "MIT"
+}
