@@ -3,6 +3,7 @@ const http = require('http');
 const server = http.createServer((req, res) => {
   if (req.url === '/server') {
     res.statusCode = 200;
+    console.log(req.body);
     console.log("Callback Server Running")
     res.end('OK');
     
@@ -11,9 +12,6 @@ const server = http.createServer((req, res) => {
     res.end('Bad Request');
     console.log('Error page with bad request');
   } else if (req.url === '/internal-error') {
-    console.log(req.body);
-   res.send("Gitlab Successfully received Webhook request");
-
     res.statusCode = 500;
     res.end('Internal Error');
     console.log("Callback Server internal-error")
