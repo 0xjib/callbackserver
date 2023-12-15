@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
 
   req.on('end', () => {
     // Log request 
-    console.log(`Received request for: ${req.url}`);
+    console.log(`Received request from: ${req.url}`);
     console.log(`Method: ${req.method}`);
     console.log(`Headers: ${JSON.stringify(req.headers)}`);
     console.log(`Request Body: ${requestBody}`);
