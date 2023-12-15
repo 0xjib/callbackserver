@@ -1,22 +1,40 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  if (req.url === '/server') {
-    res.statusCode = 200;
-    console.log("Callback Server Running")
-    res.end('OK');
-    
-  } else if (req.url === '/bad-request') {
-    res.statusCode = 400;
-    res.end('Bad Request');
-  } else if (req.url === '/internal-error') {
-    res.statusCode = 500;
-    res.end('Internal Error');
-    console.log("Callback Server internal-error")
-  } else {
-    res.statusCode = 404;
-    res.end('Not Found');
-  }
+  let requestBody = '';
+
+  req.on('data', chunk => {
+    // Collect the request body data
+    requestBody += chunk.toString();
+  });
+
+  req.on('end', () => {
+    // Log request 
+    console.log(`Received request for: ${req.url}`);
+    console.log(`Method: ${req.method}`);
+    console.log(`Headers: ${JSON.stringify(req.headers)}`);
+    console.log(`Request Body: ${requestBody}`);
+
+    switch (req.url) {
+      case '/server':
+        res.statusCode = 200;
+        console.log("Callback Server Running");
+        res.end('OK');
+        break;
+      case '/bad-request':
+        res.statusCode = 400;
+        res.end('Bad Request');
+        break;
+      case '/internal-error':
+        res.statusCode = 500;
+        console.log("Callback Server internal-error");
+        res.end('Internal Error');
+        break;
+      default:
+        res.statusCode = 404;
+        res.end('Not Found');
+    }
+  });
 });
 
 server.listen(6720, () => {
